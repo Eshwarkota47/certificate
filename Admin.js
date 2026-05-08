@@ -1,0 +1,1 @@
+console.log('Amaanitvam Admin Panel loaded.');

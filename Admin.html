@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel – Amaanitvam Foundation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="index.html" class="brand">
+      <div class="logo">A</div>
+      <span>Amaanitvam Foundation</span>
+    </a>
+    <nav>
+      <a href="index.html">Generate</a>
+      <a href="admin.html" class="active">Admin Panel</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1 class="section-title">Admin Dashboard</h1>
+    <p class="section-sub">View and manage all issued certificates.</p>
+
+    <!-- Stats — filled by admin.js -->
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card"><div class="num" id="stat-total">0</div><div class="lbl">Total Issued</div></div>
+      <div class="stat-card"><div class="num" id="stat-interns">0</div><div class="lbl">Interns</div></div>
+      <div class="stat-card"><div class="num" id="stat-volunteers">0</div><div class="lbl">Volunteers</div></div>
+      <div class="stat-card"><div class="num" id="stat-others">0</div><div class="lbl">Others</div></div>
+    </div>
+
+    <!-- Search + Filter -->
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="🔍  Search by name, event or certificate ID…" oninput="filterTable()" />
+      <select id="filter-role" onchange="filterTable()">
+        <option value="">All Roles</option>
+        <option>Intern</option>
+        <option>Volunteer</option>
+        <option>Participant</option>
+        <option>Mentor</option>
+        <option>Workshop Attendee</option>
+      </select>
+      <button class="btn btn-danger btn-sm" onclick="confirmClearAll()">🗑 Clear All</button>
+    </div>
+
+    <!-- Table -->
+    <div class="card" style="padding:0; overflow:hidden;">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cert ID</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Event / Program</th>
+              <th>Duration</th>
+              <th>Issued On</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="cert-table-body">
+            <!-- Rows injected by admin.js -->
+          </tbody>
+        </table>
+      </div>
+      <div id="empty-state" style="display:none; text-align:center; padding:48px; color:var(--gray-text);">
+        <div style="font-size:40px; margin-bottom:12px;">📄</div>
+        <div style="font-size:16px; font-weight:600;">No certificates issued yet</div>
+        <div style="font-size:14px; margin-top:6px;">Go to the <a href="index.html" style="color:var(--green-dark);">Generator</a> to create one.</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Confirm modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <h3>⚠️ Clear All Records?</h3>
+      <p style="font-size:14px; color:var(--gray-text);">This will permanently delete all issued certificate records. This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-danger" onclick="clearAll()">Yes, Delete All</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

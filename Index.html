@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certificate Generator – Amaanitvam Foundation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="index.html" class="brand">
+      <div class="logo">A</div>
+      <span>Amaanitvam Foundation</span>
+    </a>
+    <nav>
+      <a href="index.html" class="active">Generate</a>
+      <a href="admin.html">Admin Panel</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1 class="section-title">Certificate Generator</h1>
+    <p class="section-sub">Fill in the details below to generate and download an official certificate.</p>
+
+    <!-- Alert -->
+    <div id="alert" class="alert"></div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start;">
+
+      <!-- Form Card -->
+      <div class="card">
+        <h2 style="font-size:17px; font-weight:700; margin-bottom:22px; color:var(--green-dark);">Recipient Details</h2>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="rec-name" placeholder="e.g. Riya Sharma" />
+          </div>
+
+          <div class="form-group">
+            <label>Role *</label>
+            <select id="rec-role">
+              <option value="">Select role…</option>
+              <option>Intern</option>
+              <option>Volunteer</option>
+              <option>Participant</option>
+              <option>Mentor</option>
+              <option>Workshop Attendee</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label>Event / Program Name *</label>
+            <input type="text" id="rec-event" placeholder="e.g. Project Shiksha – Summer Internship 2025" />
+          </div>
+
+          <div class="form-group">
+            <label>Start Date *</label>
+            <input type="date" id="rec-start" />
+          </div>
+
+          <div class="form-group">
+            <label>End Date *</label>
+            <input type="date" id="rec-end" />
+          </div>
+
+          <div class="form-group full">
+            <label>Issued By (Signatory)</label>
+            <input type="text" id="rec-issuer" placeholder="e.g. Dr. Anjali Mehta, Director" value="Amaanitvam Foundation" />
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="generateCertificate()">
+            ⚡ Preview Certificate
+          </button>
+          <button class="btn btn-secondary" onclick="resetForm()">
+            ↺ Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Preview Card -->
+      <div class="card" id="preview-card" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <h2 style="font-size:17px; font-weight:700; color:var(--green-dark);">Preview</h2>
+          <span id="cert-id-badge" class="badge badge-gold"></span>
+        </div>
+
+        <!-- Certificate canvas renders here -->
+        <div id="cert-container" style="border:1px solid var(--gray-border); border-radius:8px; overflow:hidden; margin-bottom:16px;">
+          <canvas id="cert-canvas" style="width:100%; display:block;"></canvas>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-gold" onclick="downloadPDF()">
+            ⬇ Download PDF
+          </button>
+          <button class="btn btn-secondary" onclick="downloadImage()">
+            🖼 Download PNG
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Scripts loaded in Commit #3 -->
+  <script src="app.js"></script>
+</body>
+</html>
