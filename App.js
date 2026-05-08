@@ -281,6 +281,24 @@ function downloadPDF() {
   pdf.save(`Certificate_${window._currentCertData?.certID || 'AMF'}.pdf`);
 }
 
+// ── Prefill form if coming from Admin re-generate ────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const prefill = sessionStorage.getItem('amf_prefill');
+  if (!prefill) return;
+  const cert = JSON.parse(prefill);
+  sessionStorage.removeItem('amf_prefill');
+
+  document.getElementById('rec-name').value   = cert.name;
+  document.getElementById('rec-role').value   = cert.role;
+  document.getElementById('rec-event').value  = cert.event;
+  document.getElementById('rec-start').value  = cert.startDate;
+  document.getElementById('rec-end').value    = cert.endDate;
+  document.getElementById('rec-issuer').value = cert.issuer;
+
+  // Auto-generate preview
+  generateCertificate();
+});
+
 // ── Reset form ───────────────────────────────────────────────
 function resetForm() {
   ['rec-name','rec-role','rec-event','rec-start','rec-end'].forEach(id => {
